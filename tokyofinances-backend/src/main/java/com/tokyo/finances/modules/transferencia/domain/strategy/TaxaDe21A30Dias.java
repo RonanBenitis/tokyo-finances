@@ -1,7 +1,10 @@
 package com.tokyo.finances.modules.transferencia.domain.strategy;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
+@Component
 public class TaxaDe21A30Dias implements CalculoTaxaStrategy {
 
     @Override

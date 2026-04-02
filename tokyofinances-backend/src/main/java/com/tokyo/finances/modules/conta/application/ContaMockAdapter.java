@@ -1,10 +1,13 @@
 package com.tokyo.finances.modules.conta.application;
 
+import com.tokyo.finances.modules.transferencia.domain.exception.TransferenciaNaoPermitidaException;
 import com.tokyo.finances.modules.transferencia.domain.model.agendamento.ContaBancaria;
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
+@Component
 public class ContaMockAdapter {
     private static final Map<String, BigDecimal> BANCO_MOCK = Map.of(
             "1234567890", new BigDecimal("1000.00"),
@@ -19,7 +22,7 @@ public class ContaMockAdapter {
 
     public ContaBancaria buscar(String codigo) {
         if (!BANCO_MOCK.containsKey(codigo)) {
-            throw new RuntimeException(
+            throw new TransferenciaNaoPermitidaException(
                     "Conta " + codigo + " não encontrada. Contas disponíveis: " + BANCO_MOCK.keySet()
             );
         }
