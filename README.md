@@ -20,6 +20,30 @@ Para o desenvolvimento de uma Prova de Conceito (POC - Proof of Concept) do sist
 
 ## Tecnologias
 
+<table>
+  <thead align="center">
+    <tr border: none;>
+      <td><b>BACKEND</b></td>
+      <td><b>FRONTEND</b></td>
+      <td><b>BANCO DE DADOS</b></td>
+    </tr>
+  </thead>
+  <tbody align="center">
+    <tr>
+      <td>
+        <img alt="" src="https://img.shields.io/badge/java-sdk11-black?style=for-the-badge&logo=coffeescript&logoColor=white&label=java&labelColor=red&color=black"/>
+        <img alt="" src="https://img.shields.io/badge/springboot-V2.7.18-black?style=for-the-badge&logo=springboot&logoColor=white&label=springboot&labelColor=green&color=black"/>
+      </td>
+      <td>
+        <img alt="" src="https://img.shields.io/badge/vue.js-blue?style=for-the-badge&logo=vuedotjs&logoColor=white&labelColor=green&color=green"/>
+      </td>
+      <td>
+        <img alt="" src="https://img.shields.io/badge/h2database-blue?style=for-the-badge&logo=h2database&logoColor=white&labelColor=blue&color=blue"/>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 ### Backend
 - Java 11
 - Springboot XXXXXX
