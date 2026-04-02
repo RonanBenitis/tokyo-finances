@@ -6,7 +6,7 @@
       <ContasList ref="contasListRef" />
 
       <AgendamentoForm
-        :contas-disponiveis="contasListRef?.contas ?? []"
+        :contas-disponiveis="contas ?? []"
         @agendamento-realizado="onAgendamentoRealizado"
       />
 
@@ -20,11 +20,14 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
+import { useContas } from '@/composables/useContas'
 import AppHeader from '@/components/AppHeader.vue'
 import ContasList from '@/components/ContasList.vue'
 import AgendamentoForm from '@/components/AgendamentoForm.vue'
 import ExtratoTable from '@/components/ExtratoTable.vue'
+
+const { contas, buscarContas } = useContas()
 
 const contasListRef = ref(null)
 const extratoRef = ref(null)
@@ -34,4 +37,8 @@ const anoAtual = computed(() => new Date().getFullYear())
 function onAgendamentoRealizado() {
   extratoRef.value?.buscarExtrato()
 }
+
+onMounted(() => {
+  buscarContas()
+})
 </script>

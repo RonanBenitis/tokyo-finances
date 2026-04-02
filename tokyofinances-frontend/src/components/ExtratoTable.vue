@@ -28,8 +28,8 @@
           </thead>
           <tbody>
             <tr v-for="(item, index) in extrato" :key="item.id || index">
-              <td class="mono">{{ item.contaOrigem }}</td>
-              <td class="mono">{{ item.contaDestino }}</td>
+              <td class="mono">{{ item.contaOrigem.codigo }}</td>
+              <td class="mono">{{ item.contaDestino.codigo }}</td>
               <td class="mono valor">{{ formatarValor(item.valor) }}</td>
               <td class="mono taxa">{{ formatarValor(item.taxa) }}</td>
               <td>{{ formatarData(item.dataTransferencia) }}</td>

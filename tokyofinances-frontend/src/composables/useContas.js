@@ -11,7 +11,6 @@ export function useContas() {
       const { data } = await contaService.listarContas()
       contas.value = Object.entries(data).map(([numero, saldo]) => ({
         numeroConta: numero,
-        titular: `Cliente ${numero.substring(0, 4)}`,
         saldo: saldo,
       }))
     } catch (e) {
