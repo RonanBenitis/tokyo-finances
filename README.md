@@ -1,44 +1,9 @@
 # Aplicação: Tokyo Finances
+![alt text](./readme-assets/imagem_sistema.png)
+
 # SOBRE O PROJETO
 Trata-se do desenvolvimento de um **sistema de agendamento de transferências financeiras** - **Tokyo Finances** - capaz de realizar aplicação de taxas - seguindo regras de negócio - e emitir extrato ao usuário de todos os agendamentos cadastrados.
 O escopo do projeto seguira como POC (_proof of concept_), tendo como utilização banco em memória e arquitetura monolitica modular, trazendo agilidade sem perder a capacidade de crescimento futuro.
-
-# EXECUTANDO CÓDIGO
-
-### Backend
-
-Na raiz do projeto `tokyofinances-backend`, execute o seguinte comando:
-```
-./mvnw spring-boot:run
-```
-
-Com o servidor inicializado, os seguintes endpoins podem ser acessados via Postman/Insomnia:
-- Base URL: http://localhost:8080/api
-- GET /contas: Busca todas as contas cadastradas
-- GET /transferencias: Extrato das transferências agendadas
-- POST /transferencias: Realiza agendamento
-
-Request payloadp para realização de agendamento:
-```
-{
-    "contaOrigem": "1111111111", // Necessita ser 10 caracteres
-    "contaDestino": "2222222222", // Necessita ser 10 caracteres
-    "valor": "50.00",
-    "dataTransferencia": "2027-04-03"
-}
-```
-
-# REQUISITOS DO SOFTWARE
-## Introdução
-**Tokyo Finances**, cliente ficticio do ramo financeiro, passará a fornecer serviços de **agendamento de transferência financeira** e, para isso, demandará de uma prova de conceito para pontuar melhorias no serviço, assim como, visualização de integração na jornada do prestador em seu sistema existente.
-
-A priori, a POC contará com serviços de agendamento e consulta a extrato de todos os agendamentos cadastrados.
-
-Para o desenvolvimento de uma Prova de Conceito (POC - Proof of Concept) do sistema de agendamentos de transferência do _Tokyo Finances_, o princípio que norteará o desenvolvimento será o **KISS** - Keep it Simple... - tendo um enfoque em um produto minimamente utilizável, para futuramente receber iterações e melhorias.
-
-## Personas
-- Usuário: Prestador de serviços da Tokyo Finances, o qual realizará os agendamentos e poderá ver o extrado de todos os agendamentos cadastros
-- Sistema: Serviço especifico ao agendamento de transferência financeira da Tokyo Finances, o qual esse documento faz referência
 
 ## Tecnologias
 <table>
@@ -56,7 +21,8 @@ Para o desenvolvimento de uma Prova de Conceito (POC - Proof of Concept) do sist
         <img alt="" src="https://img.shields.io/badge/springboot-V2.7.18-black?style=for-the-badge&logo=springboot&logoColor=white&label=springboot&labelColor=green&color=black"/>
       </td>
       <td>
-        <img alt="" src="https://img.shields.io/badge/vue.js-blue?style=for-the-badge&logo=vuedotjs&logoColor=white&labelColor=green&color=green"/>
+        <img alt="" src="https://img.shields.io/badge/node-24.14.1LTS-blue?style=for-the-badge&logo=nodedotjs&logoColor=white&labelColor=green&color=black"/>
+        <img alt="" src="https://img.shields.io/badge/vue.js-3.5.31-blue?style=for-the-badge&logo=vuedotjs&logoColor=white&labelColor=green&color=black"/>
       </td>
       <td>
         <img alt="" src="https://img.shields.io/badge/h2database-blue?style=for-the-badge&logo=h2database&logoColor=white&labelColor=blue&color=blue"/>
@@ -64,6 +30,64 @@ Para o desenvolvimento de uma Prova de Conceito (POC - Proof of Concept) do sist
     </tr>
   </tbody>
 </table>
+
+# EXECUTANDO CÓDIGO
+## Backend
+Na raiz do projeto `tokyofinances-backend`, execute os seguintes comando:
+
+Instalando dependencias e building
+```
+mvn clean install
+```
+
+Inicializando servidor backend
+```
+mvnw spring-boot:run
+```
+
+Com o servidor inicializado, os seguintes endpoins podem ser acessados via Postman/Insomnia:
+- Base URL: http://localhost:8080/api
+- GET /contas: Busca todas as contas cadastradas
+- GET /transferencias: Extrato das transferências agendadas
+- POST /transferencias: Realiza agendamento
+
+Request payload para realização de agendamento:
+```
+{
+    "contaOrigem": "1111111111", // Necessita ser 10 caracteres
+    "contaDestino": "2222222222", // Necessita ser 10 caracteres
+    "valor": "50.00",
+    "dataTransferencia": "2027-04-03"
+}
+```
+
+## Frontend
+Antes de instalar as dependencias e iniciar o servidor de frontend, certifique-se que esteja:
+- Utilizando **Node versão 24 LTS**
+- **Na raiz no projeto `tokyofinances-frontend`**
+- **Servidor backend rodando** e na porta **8080**, conforme configuração padrão
+
+Instalando dependencias
+```
+npm install
+```
+
+Rodando o servido frontend
+```
+npm run dev
+```
+
+# REQUISITOS DO SOFTWARE
+## Introdução
+**Tokyo Finances**, cliente ficticio do ramo financeiro, passará a fornecer serviços de **agendamento de transferência financeira** e, para isso, demandará de uma prova de conceito para pontuar melhorias no serviço, assim como, visualização de integração na jornada do prestador em seu sistema existente.
+
+A priori, a POC contará com serviços de agendamento e consulta a extrato de todos os agendamentos cadastrados.
+
+Para o desenvolvimento de uma Prova de Conceito (POC - Proof of Concept) do sistema de agendamentos de transferência do _Tokyo Finances_, o princípio que norteará o desenvolvimento será o **KISS** - Keep it Simple... - tendo um enfoque em um produto minimamente utilizável, para futuramente receber iterações e melhorias.
+
+## Personas
+- Usuário: Prestador de serviços da Tokyo Finances, o qual realizará os agendamentos e poderá ver o extrado de todos os agendamentos cadastros
+- Sistema: Serviço especifico ao agendamento de transferência financeira da Tokyo Finances, o qual esse documento faz referência
 
 ## Escopo
 Prova de Conceito (POC), tendo como MVP o serviço de agendamento de transgerência financeira e a tela de utilização do usuário a nível de homologação.
