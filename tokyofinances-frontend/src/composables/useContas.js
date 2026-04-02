@@ -9,7 +9,11 @@ export function useContas() {
     erro.value = null
     try {
       const { data } = await contaService.listarContas()
-      contas.value = data
+      contas.value = Object.entries(data).map(([numero, saldo]) => ({
+        numeroConta: numero,
+        titular: `Cliente ${numero.substring(0, 4)}`,
+        saldo: saldo,
+      }))
     } catch (e) {
       erro.value = e.message
     } finally {

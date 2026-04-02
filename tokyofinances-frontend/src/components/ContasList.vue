@@ -20,14 +20,12 @@
         <thead>
           <tr>
             <th>Nº Conta</th>
-            <th>Titular</th>
             <th>Saldo (R$)</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="conta in contas" :key="conta.numeroConta || conta.id">
             <td class="mono">{{ conta.numeroConta }}</td>
-            <td>{{ conta.titular || '—' }}</td>
             <td class="mono">{{ formatarValor(conta.saldo) }}</td>
           </tr>
         </tbody>
