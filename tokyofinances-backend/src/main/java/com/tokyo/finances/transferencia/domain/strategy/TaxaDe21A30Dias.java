@@ -1,0 +1,16 @@
+package com.tokyo.finances.transferencia.domain.strategy;
+
+import java.math.BigDecimal;
+
+public class TaxaDe21A30Dias implements CalculoTaxaStrategy {
+
+    @Override
+    public boolean seAplica(int dias) {
+        return dias >= 21 && dias <= 30;
+    }
+
+    @Override
+    public BigDecimal calcular(BigDecimal valor) {
+        return valor.multiply(new BigDecimal("0.069"));
+    }
+}

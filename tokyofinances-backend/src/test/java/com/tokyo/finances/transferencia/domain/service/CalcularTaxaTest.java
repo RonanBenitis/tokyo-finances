@@ -1,5 +1,8 @@
 package com.tokyo.finances.transferencia.domain.service;
 
+import com.tokyo.finances.transferencia.domain.exception.TransferenciaNaoPermitidaException;
+import com.tokyo.finances.transferencia.domain.strategy.*;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,14 +12,29 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith({MockitoExtension.class})
-class ConsultarExtratoTest {
+class CalcularTaxaTest {
 
     @InjectMocks
     private CalcularTaxa calculoTaxa;
+
+    @BeforeEach
+    void setup() {
+        List<CalculoTaxaStrategy> estrategias = Arrays.asList(
+                new TaxaMesmoDia(),
+                new TaxaDe1A10Dias(),
+                new TaxaDe11A20Dias(),
+                new TaxaDe21A30Dias(),
+                new TaxaDe31A40Dias(),
+                new TaxaDe41A50Dias()
+        );
+        calculoTaxa = new CalcularTaxa(estrategias);
+    }
 
     @ParameterizedTest
     @CsvSource({
