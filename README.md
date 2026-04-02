@@ -19,7 +19,6 @@ Para o desenvolvimento de uma Prova de Conceito (POC - Proof of Concept) do sist
 - Sistema: Serviço especifico ao agendamento de transferência financeira da Tokyo Finances, o qual esse documento faz referência
 
 ## Tecnologias
-
 <table>
   <thead align="center">
     <tr border: none;>
@@ -43,16 +42,6 @@ Para o desenvolvimento de uma Prova de Conceito (POC - Proof of Concept) do sist
     </tr>
   </tbody>
 </table>
-
-### Backend
-- Java 11
-- Springboot XXXXXX
-
-### Banco de dados
-- Memória (H2)
-
-### Frontend
-- VueJs
 
 ## Escopo
 Prova de Conceito (POC), tendo como MVP o serviço de agendamento de transgerência financeira e a tela de utilização do usuário a nível de homologação.
