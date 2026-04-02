@@ -4,7 +4,29 @@ Trata-se do desenvolvimento de um **sistema de agendamento de transferências fi
 O escopo do projeto seguira como POC (_proof of concept_), tendo como utilização banco em memória e arquitetura monolitica modular, trazendo agilidade sem perder a capacidade de crescimento futuro.
 
 # EXECUTANDO CÓDIGO
-// TODO
+
+### Backend
+
+Na raiz do projeto `tokyofinances-backend`, execute o seguinte comando:
+```
+./mvnw spring-boot:run
+```
+
+Com o servidor inicializado, os seguintes endpoins podem ser acessados via Postman/Insomnia:
+- Base URL: http://localhost:8080/api
+- GET /contas: Busca todas as contas cadastradas
+- GET /transferencias: Extrato das transferências agendadas
+- POST /transferencias: Realiza agendamento
+
+Request payloadp para realização de agendamento:
+```
+{
+    "contaOrigem": "1111111111", // Necessita ser 10 caracteres
+    "contaDestino": "2222222222", // Necessita ser 10 caracteres
+    "valor": "50.00",
+    "dataTransferencia": "2027-04-03"
+}
+```
 
 # REQUISITOS DO SOFTWARE
 ## Introdução
@@ -71,14 +93,14 @@ O sistema deve calcular - e aplicar - taxas seguindo as seguintes regras:
 - A porcentagem das taxas deve seguir a tabela de transferência
 
 Tabela de Transferência
-| Dias Transferência (De) | Dias Transferência (Até) |  Valor Mínimo (R$) | Taxa |
-| :---                    | :---                     | :---               | :--- |
-| 0                       | 0                        | 3,00               | 2,5% |
-| 1                       | 10                       | 12,00              | 0,0% |
-| 11                      | 20                       | 0,00               | 8,2% |
-| 21                      | 30                       | 0,00               | 6,9% |
-| 31                      | 40                       | 0,00               | 4,7% |
-| 41                      | 50                       | 0,00               | 1,7% |
+| Dias Transferência (De) | Dias Transferência (Até) |  Valor transferência (R$) | Taxa |
+| :---                    | :---                     | :---                      | :--- |
+| 0                       | 0                        | 3,00                      | 2,5% |
+| 1                       | 10                       | 12,00                     | 0,0% |
+| 11                      | 20                       | 0,00                      | 8,2% |
+| 21                      | 30                       | 0,00                      | 6,9% |
+| 31                      | 40                       | 0,00                      | 4,7% |
+| 41                      | 50                       | 0,00                      | 1,7% |
 
 #### 4. Alertas sobre transferência não permitida
 O sistema deverá emitir alertas ao usuário de transferência não permitida caso não haja taxa aplicável.
@@ -86,6 +108,8 @@ A transferência, então, não deverá ser realizada
 
 ### Diagrama de caso de uso
 ![alt text](./readme-assets/diagrama_caso_uso.png)
+
+## Arquitetura e design
 
 ### Monolito Modular e Dominio
 Para arquitetura do sistema, utilizou-se o Monolito Modular em função da agilidade na produção de uma POC, além na redução da complexidade em infraestrutura e observabilidade - consequentemente no custo do sistema - após o kickoff. Com o crescimento do projeto, aumento no numero de deploys e/ou necessidade de se trabalhar com diferentes linguagens no backend, a modularidade da arquitetura possibilitará na separação dos módulos com baixo potencial de impacto no código em execução.
@@ -96,17 +120,20 @@ Os modulos foram separados seguindo a lógica de Bounded Contexts do Domain Driv
 
 ![alt text](./readme-assets/diagrama_hexagon_ddd-PLANO_MONOLITO_FUTURO.drawio.png)
 
-## Arquitetura
-### C2
-#### POC
-// TODO
-
 ### Hexagonal
 Como arquitetura de código, optou-se pelo Hexagonal (Ports and Adapters) pelo auto nível de desacoplamento, possibilitando maior facilidade em separação dos módulos caso haja a necessiadde, protegendo a camada de dominio.
 
 Mescla-se a estrutura hexagonal com a linguagem do Domain Driven Design pelo ganho de padronização e identificação de terminologias de negócio (linguagem ubíqua).
 
 ![alt text](./readme-assets/diagrama_hexagon_ddd-DIAGRAMAPORTSADAPT.drawio.png)
+
+### Test Driven Development direcionado
+Com enfoque no equilibrio entre agilidade e segurança, focou-se na realização do TDD no ponto central da POC com maior carga de regra de negócio, sendo na lógica do calculo dos testes.
+
+### Strategy Pattern no calculo de taxa
+Para realização do calculo das taxas conforme tabela de transferência, adotou-se o Padrão de Design Strategy por conta da possibilidade de aplicar regras de negócio especificas para cada situação, além de possibilitar acrescentar novas regras com maior facilidade, reduzindo boilerplate.
+
+![alt text](./readme-assets/image.png)
 
 ## Referencias
 - Monolito Modular: https://www.milanjovanovic.tech/blog/what-is-a-modular-monolith
